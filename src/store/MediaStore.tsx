@@ -16,7 +16,7 @@ type MediaStore = {
     mediaHomePageList: MediaHomePageItem[];
     updateMediaHomePageList: (mediaType: string, category: string, data: object) => void;
 
-    /* selected media */
+    /* selected media TODO refactor to selectedMediaDetails*/
     selectedMediaList: object;
     updateSelectedMediaList: (data: object) => void;
     reset: () => void;
@@ -25,6 +25,10 @@ type MediaStore = {
     selectedMediaCredits: object;
     updateSelectedMediaCredits: (data: object) => void;
     resetCredits: () => void;
+
+    /* browse media */
+    browseList: Array<object>;
+    updateBrowseList: (data: object) => void;
 };
 
 
@@ -90,6 +94,18 @@ export const useMediaStore = create<MediaStore>((set) => ({
         set(
             produce((state) => {
                     state.selectedMediaCredits = {};
+                }
+            )
+        ),
+
+    /* browse media */
+    browseList: [{}],
+
+    /* update browse media */
+    updateBrowseList: (data) =>
+        set(
+            produce((state) => {
+                    state.browseList[0] = data;
                 }
             )
         ),

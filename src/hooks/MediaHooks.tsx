@@ -6,7 +6,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const useFetchMediaHome = () => {
 
-    const {updateMediaHomePageList} = useMediaStore();
+    const {mediaHomePageList, updateMediaHomePageList} = useMediaStore();
 
 
     React.useEffect(() => {
@@ -57,8 +57,11 @@ export const useFetchMediaHome = () => {
             ]);
         };
 
-        fetchHomeData();
-    }, []);
+        /* check if media home page list is not loaded */
+        if (Object.keys(mediaHomePageList[0].movie.trending).length === 0) {
+            fetchHomeData();
+        }
+    }, [updateMediaHomePageList]);
 };
 
 
@@ -83,16 +86,40 @@ export const useFetchMediaDetails = (mediaType: string, mediaID: string) => {
             }
         };
         fetchMediaDetails();
-    }, []);
+    }, [updateSelectedMediaList]);
 }
 
 export const useFetchMediaCredits = (mediaType: string, mediaID: string) => {
 
-        const {updateSelectedMediaCredits} = useMediaStore();
+    const {updateSelectedMediaCredits} = useMediaStore();
+
+    React.useEffect(() => {
+        const fetchMediaCredits = async () => {
+            let url = `https://api.themoviedb.org/3/${mediaType}/${mediaID}/credits?language=en-US`;
+            try {
+                const response = await axios.get(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+                    },
+                });
+                updateSelectedMediaCredits(response.data);
+            } catch
+                (error) {
+                console.error(error);
+            }
+        };
+        fetchMediaCredits();
+    }, [updateSelectedMediaCredits]);
+}
+
+export const useBrowseMedia = (mediaType: string, browseType: string, page: string) => {
+
+        const {updateBrowseList} = useMediaStore();
 
         React.useEffect(() => {
-            const fetchMediaCredits = async () => {
-                let url = `https://api.themoviedb.org/3/${mediaType}/${mediaID}/credits?language=en-US`;
+            const fetchMediaData = async () => {
+                let url = `https://api.themoviedb.org/3/${mediaType}/${browseType}?language=en-US&page=${page}`;
                 try {
                     const response = await axios.get(url, {
                         headers: {
@@ -100,14 +127,15 @@ export const useFetchMediaCredits = (mediaType: string, mediaID: string) => {
                             Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
                         },
                     });
-                    updateSelectedMediaCredits(response.data);
+                    updateBrowseList(response.data)
                 } catch
                     (error) {
                     console.error(error);
                 }
             };
-            fetchMediaCredits();
-        }, []);
+            fetchMediaData();
+        }, [updateBrowseList, mediaType, browseType, page]);
+
 }
 
 

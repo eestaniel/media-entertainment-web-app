@@ -12,6 +12,16 @@
     justify-items: start; /* Add this line */
 }
 
+.header__group {
+    display: flex;
+    gap: 0.25rem;
+    p:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+        color: white;
+    }
+}
+
 .item__group {
     display: flex;
     gap: 0.25rem;
@@ -30,7 +40,8 @@
 
 
 button {
-    position: sticky;
     bottom: 0;
 
 }
+
+

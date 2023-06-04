@@ -1,0 +1,13 @@
+.browse__content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.browse__navigation {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    margin: 1rem 0;
+
+}
