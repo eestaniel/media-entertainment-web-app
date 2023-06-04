@@ -86,6 +86,30 @@ export const useFetchMediaDetails = (mediaType: string, mediaID: string) => {
     }, []);
 }
 
+export const useFetchMediaCredits = (mediaType: string, mediaID: string) => {
+
+        const {updateSelectedMediaCredits} = useMediaStore();
+
+        React.useEffect(() => {
+            const fetchMediaCredits = async () => {
+                let url = `https://api.themoviedb.org/3/${mediaType}/${mediaID}/credits?language=en-US`;
+                try {
+                    const response = await axios.get(url, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+                        },
+                    });
+                    updateSelectedMediaCredits(response.data);
+                } catch
+                    (error) {
+                    console.error(error);
+                }
+            };
+            fetchMediaCredits();
+        }, []);
+}
+
 
 
 
