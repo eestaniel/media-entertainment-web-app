@@ -61,3 +61,42 @@ export const useFetchMediaHome = () => {
     }, []);
 };
 
+
+export const useFetchMediaDetails = (mediaType: string, mediaID: string) => {
+
+    const {updateSelectedMediaList} = useMediaStore();
+
+    React.useEffect(() => {
+        const fetchMediaDetails = async () => {
+            let url = `https://api.themoviedb.org/3/${mediaType}/${mediaID}?language=en-US`;
+            try {
+                const response = await axios.get(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+                    },
+                });
+                updateSelectedMediaList(response.data);
+            } catch
+                (error) {
+                console.error(error);
+            }
+        };
+        fetchMediaDetails();
+    }, []);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

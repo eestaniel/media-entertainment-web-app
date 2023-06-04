@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import MediaGenres from '../genres/MediaGenres';
-
+import MediaItem from '../media/MediaItem';
 
 const Movie = () => {
   return (
@@ -9,6 +9,7 @@ const Movie = () => {
       {/* Your Movie page content here */}
       <Routes>
         <Route path="/" element={<MediaGenres />} />
+        <Route path="/:mediaID" element={<MediaItem />} />
         <Route path="/:genre/*" element={null} />
         <Route path="/category/:category" element={null} />
         <Route path="/search/:searchQuery" element={null} />

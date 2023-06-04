@@ -1,5 +1,5 @@
 import React from 'react';
-import {useMediaStore} from "../../store/MediaStore.tsx";
+import {Link, useLocation} from 'react-router-dom';
 import './styles/MediaCard.scss'
 
 interface MediaCardProps {
@@ -11,29 +11,40 @@ interface MediaCardProps {
     base_url: string;
 }
 
-const MediaCard = ({mediaType, item,logo_size, backdrop_size, base_url}: MediaCardProps) => {
+const MediaCard = ({mediaType, item, logo_size, backdrop_size, base_url}: MediaCardProps) => {
+    const location = useLocation();
+    const state = {itemData: item}
+
     return (
-        <div className={'card'}>
-            {/*if has backdrop_path not null use it, else use item.poster_path*/}
-            {item.backdrop_path ? (
-                <img src={`${base_url}${backdrop_size}${item.backdrop_path}`} alt={item.title}/>
-            ) : (
-                <img src={`${base_url}${logo_size}${item.poster_path}`} alt={item.title}/>
-            )}
+        <Link
+            to={{ pathname: `/${mediaType}/${item.id}`, state: {itemData: {item}}}}
+            className={'media__item__link'}
+            style={{ textDecoration: 'none', }}
+        >
+            <div className={'card'}>
+                {/*if has backdrop_path not null use it, else use item.poster_path*/}
+                {item.backdrop_path ? (
+                    <img src={`${base_url}${backdrop_size}${item.backdrop_path}`} alt={item.title}/>
+                ) : (
+                    <img src={`${base_url}${logo_size}${item.poster_path}`} alt={item.title}/>
+                )}
 
-            {/* Item Title*/}
-            <h3>{item.title ? item.title : item.name}</h3>
+                {/* Item Title*/}
+                <h3>{item.title ? item.title : item.name}</h3>
 
-            {/* Item Group */}
-            <div className="item__group">
-                <p className="small">
-                    {item.release_date ? item.release_date : item.first_air_date}
-                </p>
-                <div className="media-list__item-icon" datatype={`${mediaType}-icon`}></div>
-                <p className="small">{mediaType}</p>
+                {/* Item Group */}
+                <div
+                    className="item__group"
+
+                >
+                    <p className="small">
+                        {item.release_date ? item.release_date : item.first_air_date}
+                    </p>
+                    <div className="media-list__item-icon" datatype={`${mediaType}-icon`}></div>
+                    <p className="small">{mediaType}</p>
+                </div>
             </div>
-
-        </div>
+        </Link>
     );
 };
 

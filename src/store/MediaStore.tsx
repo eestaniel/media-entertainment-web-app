@@ -10,13 +10,21 @@ type MediaHomePageItem = {
     };
 };
 
+
 type MediaStore = {
+    /* home page*/
     mediaHomePageList: MediaHomePageItem[];
     updateMediaHomePageList: (mediaType: string, category: string, data: object) => void;
+
+    /* selected media */
+    selectedMediaList: object;
+    updateSelectedMediaList: (data: object) => void;
+    reset: () => void;
 };
 
 
 export const useMediaStore = create<MediaStore>((set) => ({
+    /* home page list */
     mediaHomePageList: [{
         movie: {
             trending: {},
@@ -33,13 +41,32 @@ export const useMediaStore = create<MediaStore>((set) => ({
             on_the_air: {},
         },
     }],
-
     /* update list */
     updateMediaHomePageList: (mediaType, category, data) =>
         set(
             produce((state) => {
                     state.mediaHomePageList[0][mediaType][category] = data;
                 }
+            )
+        ),
+
+    /* selected media list*/
+    selectedMediaList: {},
+
+    /* update selected media list */
+    updateSelectedMediaList: (data) =>
+        set(
+            produce((state) => {
+                    state.selectedMediaList = data;
+                },
+            )
+        ),
+    /* reset selected media */
+    reset: () =>
+        set(
+            produce((state) => {
+                    state.selectedMediaList = {};
+            }
             )
         ),
 
