@@ -34,6 +34,11 @@ const BrowseMedia = () => {
         console.log(browseType)
     }
 
+    React.useEffect(() => {
+        // Scroll to top of the page on component mount or route change
+        window.scrollTo(0, 0);
+    }, [location]);
+
     return (
         <div className={'browse-container'}>
             {/* check if browseList is loaded, then check if category === 'category'*/}
