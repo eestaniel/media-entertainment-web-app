@@ -1,16 +1,18 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import axios from 'axios';
 import {useMediaStore} from "../store/MediaStore.tsx";
 
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const useFetchMediaHome = () => {
 
-    const {mediaHomePageList, updateMediaHomePageList} = useMediaStore();
+    const {updateMediaHomePageList} = useMediaStore();
 
 
-    useEffect(() => {
+    React.useEffect(() => {
         const fetchMediaData = async (mediaType: string, category: string) => {
                 let url;
+
                 if (category === 'trending') {
                     url = `https://api.themoviedb.org/3/${category}/${mediaType}/day?language=en-US`;
                 } else {
@@ -34,14 +36,23 @@ export const useFetchMediaHome = () => {
         const fetchHomeData = async () => {
             await Promise.all([
                 fetchMediaData('movie', 'trending'),
+                await sleep(250),
                 fetchMediaData('tv', 'trending'),
+                await sleep(250),
                 fetchMediaData('movie', 'popular'),
+                await sleep(250),
                 fetchMediaData('tv', 'popular'),
+                await sleep(250),
                 fetchMediaData('movie', 'top_rated'),
+                await sleep(250),
                 fetchMediaData('tv', 'top_rated'),
+                await sleep(250),
                 fetchMediaData('movie', 'now_playing'),
+                await sleep(250),
                 fetchMediaData('tv', 'airing_today'),
+                await sleep(250),
                 fetchMediaData('movie', 'upcoming'),
+                await sleep(250),
                 fetchMediaData('tv', 'on_the_air'),
             ]);
         };

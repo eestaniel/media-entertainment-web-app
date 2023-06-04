@@ -1,19 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {useFetchMediaHome} from "../../hooks/MediaHooks"
 import {useMediaStore} from "../../store/MediaStore.tsx";
+import MediaCardList from "../media/MediaCardList.tsx";
 
 const Home = () => {
-    /*  const trendingMovies = useFetchMediaHome('movie', 'popular');
-      const trendingTVShows = useFetchMediaHome('tv', 'popular');
-      const popularMovies = useFetchMediaHome('movie', 'popular');
-      const popularTVShows = useFetchMediaHome('tv', 'popular');
-      const topRatedMovies = useFetchMediaHome('movie', 'top_rated');
-      const topRatedTVShows = useFetchMediaHome('tv', 'top_rated');
-      const nowPlayingMovies = useFetchMediaHome('movie', 'now_playing');
-      const nowPlayingTVShows = useFetchMediaHome('tv', 'on_the_air');
-      const upcomingMovies = useFetchMediaHome('movie', 'upcoming');
-      const onAirTVShows = useFetchMediaHome('tv', 'on_the_air');*/
-    const {mediaHomePageList, setMediaHomePageList} = useMediaStore();
+    const {mediaHomePageList} = useMediaStore();
 
     /* Load state with media */
     useFetchMediaHome()
@@ -24,9 +15,17 @@ const Home = () => {
     }
 
     return (
-        <div>
+        <React.Fragment>
+            <section className="trending">
+                <h1>Trending</h1>
+                <div className="trending__list">
+                    {mediaHomePageList[0].movie.trending.results && (
+                        <MediaCardList mediaType="movie" category="trending"/>
+                    )}
+                </div>
+            </section>
             <button onClick={printState}>Print State</button>
-        </div>
+        </React.Fragment>
     );
 };
 

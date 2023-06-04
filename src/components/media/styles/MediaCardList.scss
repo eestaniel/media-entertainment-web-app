@@ -1,0 +1,11 @@
+.media-list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: 1fr;
+    grid-auto-rows: minmax(0, 1fr);
+    max-height: 400px;
+    max-width: 100vw;
+    /* make scrollable x axis, */
+    overflow-x: scroll;
+
+}
