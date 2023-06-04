@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, useLocation} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './styles/MediaCard.scss'
 
 interface MediaCardProps {
@@ -12,8 +12,6 @@ interface MediaCardProps {
 }
 
 const MediaCard = ({mediaType, item, logo_size, backdrop_size, base_url}: MediaCardProps) => {
-    const location = useLocation();
-    const state = {itemData: item}
 
     return (
         <Link
