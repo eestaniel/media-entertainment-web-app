@@ -1,33 +1,35 @@
 import React from 'react';
 import {useParams, useLocation} from 'react-router-dom';
 import {useMediaStore} from "../../store/MediaStore.tsx";
-import {useFetchMediaDetails} from "../../hooks/MediaHooks.tsx";
+import {useFetchMediaCredits, useFetchMediaDetails} from "../../hooks/MediaHooks.tsx";
 import ConvertLanguage from "../../util/ConvertLanguage.tsx";
 
 const MediaItem = () => {
     const {mediaID} = useParams();
     const location = useLocation();
     const mediaType = location.pathname.split('/')[1];
-    const {selectedMediaList} = useMediaStore();
-    const {reset} = useMediaStore();
+    const {selectedMediaList, selectedMediaCredits} = useMediaStore();
+    const {reset, resetCredits} = useMediaStore();
 
     /* fetch media details */
     useFetchMediaDetails(mediaType, mediaID)
+    useFetchMediaCredits(mediaType, mediaID)
 
     React.useEffect(() => {
         return () => {
             reset()
+            resetCredits()
         }
     }, [])
 
     const printStuff = () => {
-        console.log(selectedMediaList);
+        console.log(selectedMediaCredits);
     }
 
     return (
         <React.Fragment>
             {/* Check if selectedMediaList is loaded*/}
-            {Object.keys(selectedMediaList).length > 0 ?
+            {Object.keys(selectedMediaList).length > 0 && Object.keys(selectedMediaCredits).length > 0 ?
                 (
                     <>
                         {/* image */}
@@ -61,6 +63,16 @@ const MediaItem = () => {
 
                         {/* status */}
                         <p>{selectedMediaList.status}</p>
+
+                        {/* media credits */}
+                        <div className="media__credits">
+                            <h2>Cast</h2>
+                            {selectedMediaCredits.cast.map((cast, key) => (
+                                <p key={key}>{cast.name}</p>
+                            ))}
+                        </div>
+
+
                     </>
                 ) :
                 (<p>loading</p>)

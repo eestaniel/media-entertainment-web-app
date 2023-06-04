@@ -20,6 +20,11 @@ type MediaStore = {
     selectedMediaList: object;
     updateSelectedMediaList: (data: object) => void;
     reset: () => void;
+
+    /* selected media credits */
+    selectedMediaCredits: object;
+    updateSelectedMediaCredits: (data: object) => void;
+    resetCredits: () => void;
 };
 
 
@@ -66,10 +71,28 @@ export const useMediaStore = create<MediaStore>((set) => ({
         set(
             produce((state) => {
                     state.selectedMediaList = {};
-            }
+                }
             )
         ),
 
+    /* selected media credits */
+    selectedMediaCredits: {},
+    /* update selected media credits */
+    updateSelectedMediaCredits: (data) =>
+        set(
+            produce((state) => {
+                    state.selectedMediaCredits = data;
+                }
+            )
+        ),
+    /* reset selected media credits */
+    resetCredits: () =>
+        set(
+            produce((state) => {
+                    state.selectedMediaCredits = {};
+                }
+            )
+        ),
 }));
 
 
