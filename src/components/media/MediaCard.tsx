@@ -1,5 +1,6 @@
 import React from 'react';
 import {useMediaStore} from "../../store/MediaStore.tsx";
+import './styles/MediaCard.scss'
 
 interface MediaCardProps {
     mediaType: string;
@@ -20,9 +21,14 @@ const MediaCard = ({mediaType, item,logo_size, backdrop_size, base_url}: MediaCa
                 <img src={`${base_url}${logo_size}${item.poster_path}`} alt={item.title}/>
             )}
 
-            <h3>{item.title}</h3>
+            {/* Item Title*/}
+            <h3>{item.title ? item.title : item.name}</h3>
+
+            {/* Item Group */}
             <div className="item__group">
-                <p className="small">{item.release_date.substring(0, 4)}</p>
+                <p className="small">
+                    {item.release_date ? item.release_date : item.first_air_date}
+                </p>
                 <div className="media-list__item-icon" datatype={`${mediaType}-icon`}></div>
                 <p className="small">{mediaType}</p>
             </div>

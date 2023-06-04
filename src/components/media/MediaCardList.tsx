@@ -6,9 +6,11 @@ import MediaCard from "./MediaCard.tsx";
 interface MediaCardListProps {
     mediaType: string;
     category: string;
+    totalAmount: number;
+    className: string;
 }
 
-const MediaCardList = ({mediaType, category}: MediaCardListProps) => {
+const MediaCardList = ({mediaType, category, totalAmount, className}: MediaCardListProps) => {
     const {mediaHomePageList} = useMediaStore();
 
     const base_url = "https://image.tmdb.org/t/p/";
@@ -16,9 +18,9 @@ const MediaCardList = ({mediaType, category}: MediaCardListProps) => {
     const backdrop_size = "w300";
 
     return (
-        <div className={'media-list'}>
+        <div className={className}>
             {/* map mediaHomePageList and display media item.result.title */}
-            {mediaHomePageList[0][mediaType][category].results.map((item: any) => (
+            {mediaHomePageList[0][mediaType][category].results.slice(0, totalAmount).map((item: any) => (
                 <MediaCard
                     mediaType={mediaType}
                     item={item}
