@@ -4,7 +4,7 @@ import App from './App.tsx'
 import './styles/globals.scss'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  <React.Fragment>
     <App />
-  </React.StrictMode>,
+  </React.Fragment>,
 )
