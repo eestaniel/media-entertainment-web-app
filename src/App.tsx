@@ -8,6 +8,7 @@ import SearchBar from "./components/navigation/SearchBar.tsx";
 import BrowseMedia from "./components/media/BrowseMedia.tsx";
 
 const App = () => {
+
     return (
         <React.Fragment>
             <Router>

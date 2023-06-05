@@ -17,14 +17,18 @@ const BrowseMedia = () => {
 
     useBrowseMedia(state.mediaType, state.browseType, state.selectedBrowseType, state.page)
 
-
     const handleTest = () => {
         console.log(browseList)
     }
 
+    const handleNextPage = () => {
+        console.log('next page')
+        window.scrollTo(0, 0);
+    }
+
     React.useEffect(() => {
-        // reset browseList on component mount
         return () => {
+            // reset browseList when component unmounts
             resetBrowseList();
         }
 
@@ -52,17 +56,17 @@ const BrowseMedia = () => {
                                 (item.media_type !== 'person'
                                     && (item.backdrop_path !== null && item.poster__path !== null))
                                     ? (
-                                    <div key={itemIndex}>
-                                        <MediaCard
-                                            mediaType={state.mediaType}
-                                            item={item}
-                                            key={itemIndex}
-                                            logo_size={'w300'}
-                                            backdrop_size={'w500'}
-                                            base_url={'https://image.tmdb.org/t/p/'}
-                                        />
-                                    </div>
-                                ) : null
+                                        <div key={itemIndex}>
+                                            <MediaCard
+                                                mediaType={state.mediaType}
+                                                item={item}
+                                                key={itemIndex}
+                                                logo_size={'w300'}
+                                                backdrop_size={'w500'}
+                                                base_url={'https://image.tmdb.org/t/p/'}
+                                            />
+                                        </div>
+                                    ) : null
                             )
                         ))}
 
@@ -80,12 +84,14 @@ const BrowseMedia = () => {
                         selectedBrowseType: state.selectedBrowseType,
                         page: parseInt(state.page) - 1
                     }}
+                    onClick={handleNextPage}
                 >
                     <button
                         disabled={parseInt(state.page) <= 1}>Back
                     </button>
                 </Link>
                 {/* show div current page number / 500*/}
+                {state.page} / {browseList[0]?.total_pages}
 
                 <Link
                     to={`/${state.mediaType}/${state.browseType}/${state.selectedBrowseType}?page=${parseInt(state.page) + 1}`}
@@ -95,6 +101,7 @@ const BrowseMedia = () => {
                         selectedBrowseType: state.selectedBrowseType,
                         page: parseInt(state.page) + 1
                     }}
+                    onClick={handleNextPage}
                 >
                     <button
                         disabled={parseInt(state.page) >= 500}>Continue
