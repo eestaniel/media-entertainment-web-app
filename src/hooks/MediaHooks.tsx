@@ -116,7 +116,7 @@ export const useFetchMediaCredits = (mediaType: string, mediaID: string) => {
 export const useBrowseMedia = (mediaType: string, browseType: string, selectedBrowseType: string, page: string) => {
 
     const {updateBrowseList} = useMediaStore();
-
+    console.log('mediaType:', mediaType, 'browseType:', browseType, 'selectedBrowseType:', selectedBrowseType, 'page:', page);
     React.useEffect(() => {
         const fetchMediaData = async () => {
             let url;
@@ -124,9 +124,13 @@ export const useBrowseMedia = (mediaType: string, browseType: string, selectedBr
                 url = `https://api.themoviedb.org/3/${mediaType}/${selectedBrowseType}?language=en-US&page=${page}`;
             } else if (browseType === 'genre') {
                 url = `https://api.themoviedb.org/3/discover/${mediaType}?language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${selectedBrowseType}`;
+            } else if (browseType === 'search' && mediaType === 'all') {
+                url = `https://api.themoviedb.org/3/search/multi?language=en-US&query=${selectedBrowseType}&page=${page}&include_adult=false`;
+            } else if (browseType === 'search') {
+                url = `https://api.themoviedb.org/3/search/${mediaType}?language=en-US&query=${selectedBrowseType}&page=${page}&include_adult=false`;
             }
 
-
+            console.log('url:', url)
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -141,7 +145,7 @@ export const useBrowseMedia = (mediaType: string, browseType: string, selectedBr
             }
         };
         fetchMediaData();
-    }, [updateBrowseList, mediaType, browseType, page]);
+    }, [selectedBrowseType, page, updateBrowseList]);
 }
 
 export const useFetchGenres = (mediaType: string) => {

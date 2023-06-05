@@ -13,11 +13,13 @@ interface MediaCardProps {
 
 const MediaCard = ({mediaType, item, logo_size, backdrop_size, base_url}: MediaCardProps) => {
 
+    const ifMulti = item.media_type ? item.media_type : mediaType;
+
     return (
         <Link
-            to={{ pathname: `/${mediaType}/${item.id}`, state: {itemData: {item}}}}
+            to={{pathname: `/${ifMulti}/${item.id}`, state: {itemData: {item}}}}
             className={'media__item__link'}
-            style={{ textDecoration: 'none', }}
+            style={{textDecoration: 'none',}}
         >
             <div className={'card'}>
                 {/*if has backdrop_path not null use it, else use item.poster_path*/}

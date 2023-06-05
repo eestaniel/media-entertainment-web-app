@@ -13,7 +13,7 @@ const Movie = () => {
         <Route path="/:mediaID" element={<MediaItem />} />
         <Route path="/:genre/*" element={<BrowseMedia />} />
         <Route path="/category/:category" element={<BrowseMedia />} />
-        <Route path="/search/:searchQuery" element={null} />
+        <Route path="/search/:movieName" element={<BrowseMedia/>} />
       </Routes>
       <Outlet />
     </div>

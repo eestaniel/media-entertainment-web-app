@@ -20,20 +20,15 @@ const BrowseMedia = () => {
 
     const handleTest = () => {
         console.log(browseList)
-        console.log(state.browseType)
     }
 
     React.useEffect(() => {
-        // Scroll to top of the page on component mount or route change
-        window.scrollTo(0, 0);
-
+        // reset browseList on component mount
         return () => {
-            // Scroll to top of the page on component unmount
-            window.scrollTo(0, 0);
             resetBrowseList();
         }
 
-    }, [location]);
+    }, [location.pathname]);
 
     return (
         <div className={'browse-container'}>
@@ -42,40 +37,49 @@ const BrowseMedia = () => {
                 <>
                     {state.browseType === 'category' ?
                         <h1>{state.selectedBrowseType} {state.mediaType === 'movie' ? 'Movies' : 'Shows'}</h1>
-                        :
-                        <h1>{state.genreName}</h1>
-
+                        : state.browseType === 'genre' ?
+                            <h1>{state.genreName}</h1>
+                            : state.browseType === 'search' ?
+                                <h1>{}</h1>
+                                : ''
                     }
                     <div className={"browse__content"}>
 
                         {/* map browseList */}
-                        {browseList.map((media, index) => (
-                            /*map media.results*/
-                            media.results?.map((item, index) => (
-                                <div key={index}>
-                                    <MediaCard mediaType={state.mediaType}
-                                               item={item}
-                                               key={index}
-                                               logo_size={'w300'}
-                                               backdrop_size={'w500'}
-                                               base_url={'https://image.tmdb.org/t/p/'}
-                                    />
-                                </div>
-                            ))
+                        {browseList.map((media, mediaIndex) => (
+                            /* Map media.results */
+                            media.results?.map((item, itemIndex) =>
+                                (item.media_type !== 'person'
+                                    && (item.backdrop_path !== null && item.poster__path !== null))
+                                    ? (
+                                    <div key={itemIndex}>
+                                        <MediaCard
+                                            mediaType={state.mediaType}
+                                            item={item}
+                                            key={itemIndex}
+                                            logo_size={'w300'}
+                                            backdrop_size={'w500'}
+                                            base_url={'https://image.tmdb.org/t/p/'}
+                                        />
+                                    </div>
+                                ) : null
+                            )
                         ))}
+
                     </div>
                 </>
             ) : (<h1>Loading...</h1>)}
 
             {/* create navigation button, back and continue */}
             <div className={'browse__navigation'}>
-                <Link to={`/${state.mediaType}/${state.browseType}/${state.selectedBrowseType}?page=${parseInt(state.page) - 1}`}
-                      state={{
-                          mediaType: state.mediaType,
-                          browseType: state.browseType,
-                          selectedBrowseType: state.selectedBrowseType,
-                          page: parseInt(state.page) - 1
-                      }}
+                <Link
+                    to={`/${state.mediaType}/${state.browseType}/${state.selectedBrowseType}?page=${parseInt(state.page) - 1}`}
+                    state={{
+                        mediaType: state.mediaType,
+                        browseType: state.browseType,
+                        selectedBrowseType: state.selectedBrowseType,
+                        page: parseInt(state.page) - 1
+                    }}
                 >
                     <button
                         disabled={parseInt(state.page) <= 1}>Back
@@ -83,13 +87,14 @@ const BrowseMedia = () => {
                 </Link>
                 {/* show div current page number / 500*/}
 
-                <Link to={`/${state.mediaType}/${state.browseType}/${state.selectedBrowseType}?page=${parseInt(state.page) + 1}`}
-                      state={{
-                          mediaType: state.mediaType,
-                          browseType: state.browseType,
-                          selectedBrowseType: state.selectedBrowseType,
-                          page: parseInt(state.page) + 1
-                      }}
+                <Link
+                    to={`/${state.mediaType}/${state.browseType}/${state.selectedBrowseType}?page=${parseInt(state.page) + 1}`}
+                    state={{
+                        mediaType: state.mediaType,
+                        browseType: state.browseType,
+                        selectedBrowseType: state.selectedBrowseType,
+                        page: parseInt(state.page) + 1
+                    }}
                 >
                     <button
                         disabled={parseInt(state.page) >= 500}>Continue

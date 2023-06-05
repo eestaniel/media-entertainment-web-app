@@ -13,7 +13,7 @@ const Tv = () => {
         <Route path="/:mediaID" element={<MediaItem />} /> {/* Add this route */}
         <Route path="/:genre/*" element={<BrowseMedia />} />
         <Route path="/category/:category" element={<BrowseMedia />} />
-        <Route path="/search/:searchQuery" element={null} />
+        <Route path="/search" element={null} />
       </Routes>
       <Outlet />
     </div>
