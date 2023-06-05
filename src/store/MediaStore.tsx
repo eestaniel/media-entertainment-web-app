@@ -29,6 +29,7 @@ type MediaStore = {
     /* browse media */
     browseList: Array<object>;
     updateBrowseList: (data: object) => void;
+    resetBrowseList: () => void;
 };
 
 
@@ -106,6 +107,15 @@ export const useMediaStore = create<MediaStore>((set) => ({
         set(
             produce((state) => {
                     state.browseList[0] = data;
+                }
+            )
+        ),
+
+    /* reset browseList */
+    resetBrowseList: () =>
+        set(
+            produce((state) => {
+                    state.browseList = [{}];
                 }
             )
         ),

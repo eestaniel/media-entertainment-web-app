@@ -1,50 +1,51 @@
 import React from 'react';
-import {useParams, useNavigate, useLocation} from 'react-router-dom';
+import {useLocation, Link} from 'react-router-dom';
 import {useMediaStore} from '../../store/MediaStore.tsx';
-import {useBrowseMedia} from "../../hooks/MediaHooks.tsx";
 import MediaCard from "./MediaCard.tsx";
 import './styles/BrowseMedia.scss'
+import {useBrowseMedia} from "../../hooks/MediaHooks.tsx";
 
 const BrowseMedia = () => {
-    const {category} = useParams();
-    /*get mediaType, category, and page number from url*/
     const location = useLocation();
-    const mediaType = location.pathname.split('/')[1];
-    const browseType = location.pathname.split('/')[2];
-    const searchParams = new URLSearchParams(location.search);
-    const currentPage = searchParams.get('page') || 1;
-    console.log(mediaType, category, currentPage);
-    const {browseList} = useMediaStore();
+    const state = location.state;
+    const {browseList, resetBrowseList} = useMediaStore();
 
     /* fetch data */
-    useBrowseMedia(mediaType, category, currentPage)
-    console.log(mediaType, category, currentPage);
+    /*useBrowseMedia(mediaType, category, currentPage)*/
+    console.log(state.mediaType, state.browseType, state.selectedBrowseType, state.page)
 
-    const [mediaState, setMediaState] = React.useState({
-        mediaList: [],
-        totalPages: 0,
-        totalResults: 0,
-        isLoading: true,
-        isError: false,
-    });
-    const navigate = useNavigate();
+
+    useBrowseMedia(state.mediaType, state.browseType, state.selectedBrowseType, state.page)
+
 
     const handleTest = () => {
         console.log(browseList)
-        console.log(browseType)
+        console.log(state.browseType)
     }
 
     React.useEffect(() => {
         // Scroll to top of the page on component mount or route change
         window.scrollTo(0, 0);
+
+        return () => {
+            // Scroll to top of the page on component unmount
+            window.scrollTo(0, 0);
+            resetBrowseList();
+        }
+
     }, [location]);
 
     return (
         <div className={'browse-container'}>
             {/* check if browseList is loaded, then check if category === 'category'*/}
-            {Object.keys(browseList).length > 0 && browseType === 'category' ? (
+            {Object.keys(browseList).length > 0 ? (
                 <>
-                    <h1>{category} {mediaType === 'movie' ? 'Movies' : 'Shows'}</h1>
+                    {state.browseType === 'category' ?
+                        <h1>{state.selectedBrowseType} {state.mediaType === 'movie' ? 'Movies' : 'Shows'}</h1>
+                        :
+                        <h1>{state.genreName}</h1>
+
+                    }
                     <div className={"browse__content"}>
 
                         {/* map browseList */}
@@ -52,7 +53,7 @@ const BrowseMedia = () => {
                             /*map media.results*/
                             media.results?.map((item, index) => (
                                 <div key={index}>
-                                    <MediaCard mediaType={mediaType}
+                                    <MediaCard mediaType={state.mediaType}
                                                item={item}
                                                key={index}
                                                logo_size={'w300'}
@@ -68,14 +69,32 @@ const BrowseMedia = () => {
 
             {/* create navigation button, back and continue */}
             <div className={'browse__navigation'}>
-                <button onClick={() => navigate(`/${mediaType}/category/${category}?page=${parseInt(currentPage) - 1}`)}
-                        disabled={parseInt(currentPage) <= 1}>Back
-                </button>
+                <Link to={`/${state.mediaType}/${state.browseType}/${state.selectedBrowseType}?page=${parseInt(state.page) - 1}`}
+                      state={{
+                          mediaType: state.mediaType,
+                          browseType: state.browseType,
+                          selectedBrowseType: state.selectedBrowseType,
+                          page: parseInt(state.page) - 1
+                      }}
+                >
+                    <button
+                        disabled={parseInt(state.page) <= 1}>Back
+                    </button>
+                </Link>
                 {/* show div current page number / 500*/}
-                <div>{currentPage} / 500</div>
-                <button onClick={() => navigate(`/${mediaType}/category/${category}?page=${parseInt(currentPage) + 1}`)}
-                        disabled={parseInt(currentPage) >= 500}>Continue
-                </button>
+
+                <Link to={`/${state.mediaType}/${state.browseType}/${state.selectedBrowseType}?page=${parseInt(state.page) + 1}`}
+                      state={{
+                          mediaType: state.mediaType,
+                          browseType: state.browseType,
+                          selectedBrowseType: state.selectedBrowseType,
+                          page: parseInt(state.page) + 1
+                      }}
+                >
+                    <button
+                        disabled={parseInt(state.page) >= 500}>Continue
+                    </button>
+                </Link>
             </div>
             {/*create test button onclick handleTest*/}
             <button onClick={handleTest}>Test</button>

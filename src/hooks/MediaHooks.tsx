@@ -113,13 +113,70 @@ export const useFetchMediaCredits = (mediaType: string, mediaID: string) => {
     }, [updateSelectedMediaCredits]);
 }
 
-export const useBrowseMedia = (mediaType: string, browseType: string, page: string) => {
+export const useBrowseMedia = (mediaType: string, browseType: string, selectedBrowseType: string, page: string) => {
+
+    const {updateBrowseList} = useMediaStore();
+
+    React.useEffect(() => {
+        const fetchMediaData = async () => {
+            let url;
+            if (browseType === 'category') {
+                url = `https://api.themoviedb.org/3/${mediaType}/${selectedBrowseType}?language=en-US&page=${page}`;
+            } else if (browseType === 'genre') {
+                url = `https://api.themoviedb.org/3/discover/${mediaType}?language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${selectedBrowseType}`;
+            }
+
+
+            try {
+                const response = await axios.get(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+                    },
+                });
+                updateBrowseList(response.data)
+            } catch
+                (error) {
+                console.error(error);
+            }
+        };
+        fetchMediaData();
+    }, [updateBrowseList, mediaType, browseType, page]);
+}
+
+export const useFetchGenres = (mediaType: string) => {
+    const [genres, setGenres] = React.useState([]);
+
+    React.useEffect(() => {
+        const fetchGenres = async () => {
+            const url = `https://api.themoviedb.org/3/genre/${mediaType}/list?language=en-US`;
+            try {
+                const response = await axios.get(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+                    },
+                });
+                setGenres(response.data.genres);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchGenres();
+    }, [mediaType]);
+
+    return genres;
+};
+
+
+export const useFetchMediaGenre = (mediaType: string, genreID: string, page: string) => {
 
         const {updateBrowseList} = useMediaStore();
 
         React.useEffect(() => {
             const fetchMediaData = async () => {
-                let url = `https://api.themoviedb.org/3/${mediaType}/${browseType}?language=en-US&page=${page}`;
+                let url = `https://api.themoviedb.org/3/discover/${mediaType}?language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreID}`;
                 try {
                     const response = await axios.get(url, {
                         headers: {
@@ -134,12 +191,8 @@ export const useBrowseMedia = (mediaType: string, browseType: string, page: stri
                 }
             };
             fetchMediaData();
-        }, [updateBrowseList, mediaType, browseType, page]);
-
+        }, [updateBrowseList, mediaType, genreID, page]);
 }
-
-
-
 
 
 
