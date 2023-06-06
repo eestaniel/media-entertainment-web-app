@@ -23,7 +23,7 @@ const Home = () => {
                     <div className="header__group">
                         <h1>Trending <span>movies</span></h1>
                     </div>
-                    <div className="trending__list">
+                    <div className="trending__list-container">
                         {mediaHomePageList[0].movie.trending?.results && (
                             <MediaCardList mediaType="movie"
                                            category="trending"
@@ -37,7 +37,7 @@ const Home = () => {
                     <div className="header__group">
                         <h1>Trending <span>tv shows</span></h1>
                     </div>
-                    <div className="trending__list">
+                    <div className="trending__list-container">
                         {mediaHomePageList[0].tv.trending.results && (
                             <MediaCardList mediaType="tv" category="trending" className={"trending__list"}
                                            totalAmount={mediaHomePageList[0]['tv']['trending'].length}/>
