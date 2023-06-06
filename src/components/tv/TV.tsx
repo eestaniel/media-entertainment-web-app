@@ -6,7 +6,7 @@ import BrowseMedia from "../media/BrowseMedia.tsx";
 
 const Tv = () => {
   return (
-    <div>
+    <div className={'mediaType__container'}>
       {/* Your Movie page content here */}
       <Routes>
         <Route path="/" element={<MediaGenres />} />
