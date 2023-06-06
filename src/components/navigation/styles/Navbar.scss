@@ -1,0 +1,61 @@
+@import "../../../styles/_colors";
+
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    place-items: center;
+    background-color: $color-accent;
+    max-width: 100vw;
+    max-height: 3.5rem;
+    height: 100%;
+    ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        padding: 0;
+    }
+    li {
+        list-style-type: none;
+    }
+}
+
+.navbar__logo[datatype="logo"] {
+    content: '';
+    height: 24px;
+    width: 24px;
+    background: url("../../../assets/images/logo.svg") no-repeat center;
+}
+
+.navbar__link__icon[datatype="home"] {
+    content: '';
+    height: 24px;
+    width: 24px;
+    background: url("../../../assets/images/icon-nav-home.svg") no-repeat center;
+}
+
+.navbar__link__icon[datatype="movies"] {
+    content: '';
+    height: 24px;
+    width: 24px;
+    aspect-ratio: 1/1;
+    background: url("../../../assets/images/icon-nav-movies.svg") no-repeat center;
+}
+
+.navbar__link__icon[datatype="tv"] {
+    content: '';
+    height: 24px;
+    width: 24px;
+    aspect-ratio: 1/1;
+    background: url("../../../assets/images/icon-nav-tv-series.svg") no-repeat center;
+}
+
+.navbar__avatar[datatype="avatar"] {
+    content: '';
+    height: 24px;
+    width: 24px;
+    aspect-ratio: 1/1;
+    background: url("../../../assets/images/image-avatar.png") no-repeat;
+    background-size: contain;
+    border: 1px solid $color-text;
+    border-radius: 50%;
+}
