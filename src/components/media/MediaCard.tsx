@@ -29,20 +29,19 @@ const MediaCard = ({mediaType, item, logo_size, backdrop_size, base_url}: MediaC
                     <img src={`${base_url}${logo_size}${item.poster_path}`} alt={item.title}/>
                 )}
 
-                {/* Item Title*/}
-                <h3>{item.title ? item.title : item.name}</h3>
-
                 {/* Item Group */}
                 <div
                     className="item__group"
 
                 >
                     <p className="small">
-                        {item.release_date ? item.release_date : item.first_air_date}
+                        {item.release_date ? item.release_date.substring(0, 4) : item.first_air_date.substring(0, 4)}
                     </p>
                     <div className="media-list__item-icon" datatype={`${mediaType}-icon`}></div>
                     <p className="small">{mediaType}</p>
                 </div>
+                {/* Item Title*/}
+                <h3>{item.title ? item.title : item.name}</h3>
             </div>
         </Link>
     );

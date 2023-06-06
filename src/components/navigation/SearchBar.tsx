@@ -80,7 +80,6 @@ const SearchBar = () => {
 
                 />
             </div>
-            <button onClick={handleSubmit}> submit</button>
         </form>
     );
 };

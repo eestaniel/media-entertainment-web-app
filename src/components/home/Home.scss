@@ -1,0 +1,27 @@
+@import '../../styles/typography';
+
+.media-container {
+    max-width: 100vw;
+    padding: 1rem;
+    display: grid;
+    gap: 1.5rem;
+
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    h3 {
+        font-size: $--fs-b-medium;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+
+    .header__group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
