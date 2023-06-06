@@ -22,10 +22,14 @@ const SearchBar = () => {
     }
 
 
+    React.useEffect(() => {
+       searchRef.current.value = '';
+    }, [location.pathname]  )
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         switch (searchRef.current?.value) {
+
             /*check if empty*/
             case '':
                 return;
@@ -65,6 +69,7 @@ const SearchBar = () => {
 
 
     }
+
 
     return (
         <form onSubmit={handleSubmit}>

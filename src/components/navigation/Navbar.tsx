@@ -7,7 +7,9 @@ const Navbar = () => {
         <React.Fragment>
             {/* Navbar: home, movie, tv */}
             <nav className="navbar">
-                <div className="navbar__logo" datatype={'logo'}></div>
+                <Link to="/" className="navbar__logo">
+                    <div className="navbar__logo" datatype={'logo'}></div>
+                </Link>
                 <div className="navbar__links">
                     <ul>
                         <li>
