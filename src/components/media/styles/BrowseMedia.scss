@@ -57,6 +57,14 @@
     justify-content: center;
 }
 
+.browse__navigation {
+    &a {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
 @media screen and (min-width: 445px) {
     .browse__item {
         max-width: 30%;

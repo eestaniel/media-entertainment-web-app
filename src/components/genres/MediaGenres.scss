@@ -36,10 +36,18 @@
 
     .even {
         background-color: $color-secondary;
+
+        &:hover {
+            background-color: hsl(223, 23%, 66%);
+        }
     }
 
     .odd {
         background-color: $color-accent;
+
+        &:hover {
+            background-color: hsl(223, 36%, 34%);
+        }
     }
 
 
@@ -60,6 +68,7 @@
 @media screen and (min-width: 445px) {
     .genre-container {
         margin-top: 3rem;
+
         a {
             width: 40%;
         }
@@ -90,6 +99,7 @@
             width: 15%;
             height: 10rem;
         }
+
         h2 {
             font-size: 1.125rem !important;
         }
