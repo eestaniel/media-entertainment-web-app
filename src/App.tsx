@@ -10,7 +10,7 @@ const App = () => {
 
     return (
         <div className={'container'}>
-            <Router basename={'/media-entertainment-web-app/'}>
+            <Router basename={'/media-entertainment-web-app'}>
                 <Navbar/>
 
                 <div className="main-container">
