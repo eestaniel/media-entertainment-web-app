@@ -25,6 +25,7 @@ const App = () => {
 
                         {/*TODO Validate url parameters before using in api calls*/}
                     </Routes>
+                    <div className="attribution" datatype={'tmdb'}></div>
                 </div>
             </Router>
         </div>
