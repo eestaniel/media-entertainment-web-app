@@ -20,7 +20,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: https://www.frontendmentor.io/solutions/react-typescript-vite-tmdb-api-qaP9nO6x1t
-- Live Site URL: https://eestaniel.github.io/media-entertainment-web-app/
+- Live Site URL: https://mediasearch-ee.netlify.app/
 
 ## My process
 
