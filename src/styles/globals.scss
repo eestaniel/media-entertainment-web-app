@@ -76,13 +76,21 @@ p {
         grid-area: container;
         overflow-y: auto;
         height: 100vh;
+        width: 100%;
 
         grid-template-columns: 1fr;
         grid-template-rows: min-content 1fr;
 
-        padding: 2rem;
+        padding: 2rem 4rem;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .container {
     }
 
-
+    .main-container {
+        padding: 4rem 12rem;
+    }
 }
 

@@ -9,9 +9,10 @@ interface MediaCardProps {
     logo_size: string;
     backdrop_size: string;
     base_url: string;
+    imgType: string;
 }
 
-const MediaCard = ({mediaType, item, logo_size, backdrop_size, base_url}: MediaCardProps) => {
+const MediaCard = ({mediaType, item, logo_size, backdrop_size, base_url, imgType}: MediaCardProps) => {
 
     const ifMulti = item.media_type ? item.media_type : mediaType;
 
@@ -23,10 +24,10 @@ const MediaCard = ({mediaType, item, logo_size, backdrop_size, base_url}: MediaC
         >
             <div className={'card'}>
                 {/*if has backdrop_path not null use it, else use item.poster_path*/}
-                {item.backdrop_path ? (
-                    <img src={`${base_url}${backdrop_size}${item.backdrop_path}`} alt={item.title}/>
-                ) : (
+                {item.poster_path ? (
                     <img src={`${base_url}${logo_size}${item.poster_path}`} alt={item.title}/>
+                ) : (
+                    <img src={`${base_url}${backdrop_size}${item.backdrop_path}`} alt={item.title}/>
                 )}
 
                 {/* Item Group */}

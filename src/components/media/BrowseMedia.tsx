@@ -62,9 +62,10 @@ const BrowseMedia = () => {
                                                 mediaType={state.mediaType}
                                                 item={item}
                                                 key={itemIndex}
-                                                logo_size={'w300'}
-                                                backdrop_size={'w500'}
+                                                logo_size={'original'}
+                                                backdrop_size={'original'}
                                                 base_url={'https://image.tmdb.org/t/p/'}
+                                                imgType={'backdrop'}
                                             />
                                         </div>
                                     ) : null

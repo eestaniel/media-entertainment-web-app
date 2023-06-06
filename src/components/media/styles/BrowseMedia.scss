@@ -1,13 +1,31 @@
 .browse-container {
-    max-width: 100vw;
+    max-width: 100%;
     display: grid;
     text-transform: capitalize;
+
     h1 {
         font-size: 1.25rem;
         padding: 0 1rem;
     }
+
+    h3 {
+        text-align: center;
+    }
 }
 
+.media-list__item-icon[datatype='movie-icon'] {
+    content: '';
+    background: url('../../../assets/images/icon-category-movie.svg') no-repeat center center;
+    height: 24px;
+    width: 24px;
+}
+
+.media-list__item-icon[datatype='tv-icon'] {
+    content: '';
+    background: url('../../../assets/images/icon-category-tv.svg') no-repeat center center;
+    height: 24px;
+    width: 24px;
+}
 
 .browse__content {
     width: 100vw;
@@ -32,3 +50,52 @@
     margin: 1rem 0;
 
 }
+
+.item__group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (min-width: 445px) {
+    .browse__item {
+        max-width: 30%;
+    }
+}
+
+
+@media screen and (min-width: 1024px) {
+
+    .browse-container {
+        width: 100%;
+    }
+
+    .browse__item {
+        max-width: 20%;
+    }
+
+    .browse__content {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+        justify-content: space-around;
+
+        img {
+            object-fit: contain;
+        }
+    }
+
+
+}
+
+@media screen and (min-width: 1440px) {
+    .browse__item {
+        max-width: 15%;
+    }
+    .browse__content {
+        justify-content: center;
+    }
+}
+
+

@@ -68,7 +68,9 @@
         width: 96px;
         height: 95vh;
         border-radius: 1.25rem;
-
+        display: grid;
+        place-self: center;
+        margin-top: auto;
 
     }
 

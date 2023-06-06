@@ -34,3 +34,11 @@
 
 
 }
+
+@media screen and (min-width: 1024px) {
+    .card {
+        img {
+            height: 230px;
+        }
+    }
+}

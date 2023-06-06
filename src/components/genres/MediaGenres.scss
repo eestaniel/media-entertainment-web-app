@@ -78,8 +78,20 @@
 @media screen and (min-width: 1024px) {
     .genre-container {
         a {
+            width: 20%;
+            height: 10rem;
+        }
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .genre-container {
+        a {
             width: 15%;
             height: 10rem;
+        }
+        h2 {
+            font-size: 1.125rem !important;
         }
     }
 }

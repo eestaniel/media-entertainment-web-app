@@ -14,8 +14,8 @@ const MediaCardList = ({mediaType, category, totalAmount, className}: MediaCardL
     const {mediaHomePageList} = useMediaStore();
 
     const base_url = "https://image.tmdb.org/t/p/";
-    const logo_size = "w500";
-    const backdrop_size = "w300";
+    const logo_size = "original";
+    const backdrop_size = "original";
 
     return (
         <div className={className}>

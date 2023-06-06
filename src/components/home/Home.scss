@@ -21,11 +21,14 @@
 
     .category__section {
         width: 100%;
+        display: grid;
+        gap: 1.5rem;
     }
 
     .header__group {
         display: flex;
         align-items: center;
+        margin-bottom: 1rem;
     }
 
 
@@ -58,7 +61,32 @@
         display: flex;
         align-items: center;
     }
+}
+
+@media screen and (min-width: 1024px) {
+    .media-container {
+        margin: 0;
+        .media__list {
+            width: 100%;
+        }
+
+        .category__list {
+            a {
+                width: 24%;
+                flex-grow: 1;
+                img {
+                    object-fit: cover;
+                }
+            }
+            h3 {
+                font-size: 1.25rem !important;
+            }
+        }
+
+
+    }
 
 
 }
+
 

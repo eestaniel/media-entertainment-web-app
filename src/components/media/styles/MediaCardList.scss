@@ -7,11 +7,11 @@
     overflow: hidden;
     width: 100%;
 
-
     .trending__list {
         display: flex;
         flex-wrap: nowrap;
         overflow-x: scroll;
+        overflow-y: hidden;
 
         > * {
             width: 240px;
@@ -66,5 +66,32 @@ button {
     bottom: 0;
 
 }
+
+@media screen and (min-width: 1024px) {
+    .trending__list-container {
+
+        .trending__list {
+
+            > * {
+                width: 470px;
+                flex-shrink: 0;
+                margin-right: rem; /* optional margin between items */
+            }
+        }
+
+        .item__group,
+        h3 {
+            position: relative;
+            transform: translate(1rem, -4rem) !important;
+            padding-right: 2rem;
+            font-size: 1.25rem !important;
+        }
+
+        .media-list__item-icon {
+            margin-left: 0.5rem !important;
+        }
+    }
+}
+
 
 
