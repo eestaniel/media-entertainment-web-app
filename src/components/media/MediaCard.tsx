@@ -35,7 +35,7 @@ const MediaCard = ({mediaType, item, logo_size, backdrop_size, base_url}: MediaC
 
                 >
                     <p className="small">
-                        {item.release_date ? item.release_date.substring(0, 4) : item.first_air_date.substring(0, 4)}
+                        {item.release_date ? item.release_date.substring(0, 4) : item.first_air_date? item.first_air_date.substring(0, 4): ''}
                     </p>
                     <div className="media-list__item-icon" datatype={`${mediaType}-icon`}></div>
                     <p className="small">{mediaType}</p>

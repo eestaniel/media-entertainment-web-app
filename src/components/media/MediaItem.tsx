@@ -3,6 +3,7 @@ import {useParams, useLocation} from 'react-router-dom';
 import {useMediaStore} from "../../store/MediaStore.tsx";
 import {useFetchMediaCredits, useFetchMediaDetails} from "../../hooks/MediaHooks.tsx";
 import ConvertLanguage from "../../util/ConvertLanguage.tsx";
+import './styles/MediaItem.scss'
 
 const MediaItem = () => {
     const {mediaID} = useParams();
@@ -31,7 +32,7 @@ const MediaItem = () => {
             {/* Check if selectedMediaList is loaded*/}
             {Object.keys(selectedMediaList).length > 0 && Object.keys(selectedMediaCredits).length > 0 ?
                 (
-                    <>
+                    <div className={'selected-media-container'}>
                         {/* image */}
                         <img src={`https://image.tmdb.org/t/p/w500${selectedMediaList.poster_path}`}
                              alt={selectedMediaList.title}/>
@@ -39,41 +40,64 @@ const MediaItem = () => {
                         {/* title */}
                         <h1>{selectedMediaList.title}</h1>
 
+                        {/* tag line */}
+                        <p className={'medium tagline'}>{selectedMediaList.tagline}</p>
+
                         {/* overview */}
-                        <p>{selectedMediaList.overview}</p>
+                        <h2 className={'small'}>Overview</h2>
+                        <p className={'medium'}>{selectedMediaList.overview}</p>
 
                         {/* iterate genres, use key*/}
-                        {selectedMediaList.genres.map((genre, key) => (
-                            <p key={key}>{genre.name}</p>
-                        ))}
+                        <h2 className={'small'}>Genres</h2>
+                        <div className="genre__container">
+                            {selectedMediaList.genres.map((genre, key) => (
+                                <p className={'genre__item'} key={key}>{genre.name}</p>
+                            ))}
+                        </div>
 
                         {/* rating */}
+                        <h2 className={'small'}>Rating</h2>
                         <p>{(selectedMediaList.vote_average / 2).toFixed(1)} / 5</p>
 
                         {/* movie detail group*/}
                         <div className="movie__detail__group">
                             {/* language to full name*/}
-                            <p>{ConvertLanguage(selectedMediaList.original_language)}</p>
+                            <div className="detail__group__item">
+                                <p className={'small group-header'}>Language</p>
+                                <p>{ConvertLanguage(selectedMediaList.original_language)}</p>
+                            </div>
                             {/* if movie: year release, else year aired*/}
-                            <p>{mediaType === 'movie' ? selectedMediaList.release_date.split('-')[0] : selectedMediaList.first_air_date}</p>
+                            <div className="detail__group__item">
+                                <p className={'small group-header'}>{mediaType === 'movie' ? 'Year' : 'Aired'}</p>
+                                <p>{mediaType === 'movie' ? selectedMediaList.release_date.split('-')[0] : selectedMediaList.first_air_date.substring(0,4)}</p>
+                            </div>
+                            {/* if movie: length of film, else last aired */}
+                            <div className="detail__group__item">
+                                <p className={'small group-header'}>{mediaType === 'movie' ? 'Length' : 'Last Aired'}</p>
+                                <p>{mediaType === 'movie' ? `${selectedMediaList.runtime} minutes` : selectedMediaList.last_air_date.substring(0,4)}</p>
+                            </div>
+                            {/* status */}
+                            <div className="detail__group__item">
+                                <p className={'small group-header'}>Status</p>
+                                <p>{selectedMediaList.status}</p>
+                            </div>
                         </div>
 
-                        {/* if movie: length of film, else last aired */}
-                        <p>{mediaType === 'movie' ? `${selectedMediaList.runtime} min` : selectedMediaList.last_air_date}</p>
-
-                        {/* status */}
-                        <p>{selectedMediaList.status}</p>
 
                         {/* media credits */}
                         <div className="media__credits">
-                            <h2>Cast</h2>
-                            {selectedMediaCredits.cast.map((cast, key) => (
-                                <p key={key}>{cast.name}</p>
-                            ))}
+                            <h2 className={'small'}>Cast</h2>
+                            <div className="media__credits__container">
+                                {selectedMediaCredits.cast.map((cast, key) => (
+                                    <p className={'small cast__item'}
+                                       key={key}>{cast.name}
+                                    </p>
+                                ))}
+                            </div>
                         </div>
 
 
-                    </>
+                    </div>
                 ) :
                 (<p>loading</p>)
             }

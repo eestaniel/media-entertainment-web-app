@@ -56,7 +56,8 @@ const BrowseMedia = () => {
                                 (item.media_type !== 'person'
                                     && (item.backdrop_path !== null && item.poster__path !== null))
                                     ? (
-                                        <div key={itemIndex}>
+                                        <div className={'browse__item'}
+                                             key={itemIndex}>
                                             <MediaCard
                                                 mediaType={state.mediaType}
                                                 item={item}
