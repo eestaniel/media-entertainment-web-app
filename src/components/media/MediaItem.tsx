@@ -105,9 +105,6 @@ const MediaItem = () => {
                 ) :
                 (<p>loading</p>)
             }
-
-
-            <button onClick={printStuff}>Print Stuff</button>
         </React.Fragment>
     );
 };
