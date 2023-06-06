@@ -5,7 +5,7 @@ import Movie from './components/movie/Movie';
 import TV from './components/tv/TV';
 import Navbar from "./components/navigation/Navbar.tsx";
 import SearchBar from "./components/navigation/SearchBar.tsx";
-import BrowseMedia from "./components/media/BrowseMedia.tsx";
+import All from "./components/all/All.tsx";
 
 const App = () => {
 
@@ -18,7 +18,7 @@ const App = () => {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/movie/*" element={<Movie/>}/>
                     <Route path="/tv/*" element={<TV/>}/>
-                    <Route path="/all/search/:movieName" element={<BrowseMedia/>}/>
+                    <Route path="/all/*" element={<All/>}/>
                     {/* TODO change to error 404 not found*/}
                     {/*<Route path="/*" element={<Home />} />*/}
 

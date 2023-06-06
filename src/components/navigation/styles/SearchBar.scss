@@ -1,0 +1,39 @@
+@import '../../../styles/colors';
+@import '../../../styles/typography';
+
+.search-bar {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    input {
+        background-color: transparent;
+        color: $color-text;
+        opacity: 50%;
+        border: none;
+        font-size: var(--fs-b-medium);
+        outline: none;
+
+    }
+}
+
+.focus {
+    input {
+        opacity: 100% !important;
+        caret-color: $color-primary;
+    }
+}
+
+.hasQuery {
+    input {
+        opacity: 100% !important;
+    }
+}
+
+.search-bar__icon[datatype="search"] {
+    content: '';
+    width: 24px;
+    height: 24px;
+    aspect-ratio: 1/1;
+    background: url("../../../assets/images/icon-search.svg") no-repeat center;
+}
