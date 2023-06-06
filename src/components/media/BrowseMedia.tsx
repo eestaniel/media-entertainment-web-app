@@ -18,7 +18,7 @@ const BrowseMedia = () => {
     useBrowseMedia(state.mediaType, state.browseType, state.selectedBrowseType, state.page)
 
     const handleTest = () => {
-        console.log(browseList)
+        console.log(state)
     }
 
     const handleNextPage = () => {
@@ -44,7 +44,7 @@ const BrowseMedia = () => {
                         : state.browseType === 'genre' ?
                             <h1>{state.genreName}</h1>
                             : state.browseType === 'search' ?
-                                <h1>{}</h1>
+                                <h1>{state.selectedBrowseType}</h1>
                                 : ''
                     }
                     <div className={"browse__content"}>

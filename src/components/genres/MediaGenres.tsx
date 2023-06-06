@@ -30,9 +30,6 @@ const MediaGenres = () => {
                     </div>
                 </Link>
             ))}
-
-            {/* Create test button to print genres */}
-            <button onClick={() => console.log(genres)}>Print Genres</button>
         </div>
     );
 };
