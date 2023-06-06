@@ -16,7 +16,7 @@ const BrowseMedia = () => {
 
     const handleNextPage = () => {
         const container = document.querySelector('.main-container');
-        window.scrollTo(0, container.scrollHeight)
+        window.scrollTo(0, container!.scrollHeight)
     }
 
     React.useEffect(() => {
