@@ -48,6 +48,7 @@ p {
 
 @media screen and (min-width: 1024px) {
     body {
+        overflow-y: hidden;
     }
 
     .container {
@@ -69,9 +70,13 @@ p {
     .main-container {
         display: grid;
         grid-area: container;
-        overflow-y: scroll;
+        overflow-y: auto;
         height: 100vh;
 
+        grid-template-columns: 1fr;
+        grid-template-rows: min-content 1fr;
+
+        padding: 2rem;
     }
 
 

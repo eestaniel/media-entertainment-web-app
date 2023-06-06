@@ -37,3 +37,11 @@
     aspect-ratio: 1/1;
     background: url("../../../assets/images/icon-search.svg") no-repeat center;
 }
+
+@media screen and (min-width: 1024px) {
+    .search-bar {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+    }
+}
