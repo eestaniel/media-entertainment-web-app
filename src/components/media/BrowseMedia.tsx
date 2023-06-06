@@ -16,14 +16,14 @@ const BrowseMedia = () => {
 
     const handleNextPage = () => {
         const container = document.querySelector('.main-container');
-        container?.scrollTo(0, 0);
+        window.scrollTo(0, container.scrollHeight)
     }
 
     React.useEffect(() => {
         return () => {
             // reset browseList when component unmounts
             resetBrowseList();
-            window.scrollTo(0, 0);
+            window.scrollTo(0, 0)
         }
 
     }, [location.pathname,]);

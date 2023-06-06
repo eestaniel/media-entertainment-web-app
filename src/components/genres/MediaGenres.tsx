@@ -1,5 +1,5 @@
 import {useLocation, Link} from 'react-router-dom';
-import {useFetchGenres} from "../../hooks/MediaHooks";
+import {useFetchGenres} from "../../hooks/MediaHooks.tsx";
 import './MediaGenres.scss'
 import {useRef} from "react";
 

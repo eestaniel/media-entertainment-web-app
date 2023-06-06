@@ -1,5 +1,5 @@
 
-import {useFetchMediaHome} from "../../hooks/MediaHooks"
+import {useFetchMediaHome} from "../../hooks/MediaHooks.tsx"
 import {useMediaStore} from "../../store/MediaStore.tsx";
 import MediaCardList from "../media/MediaCardList.tsx";
 import {Link} from "react-router-dom";

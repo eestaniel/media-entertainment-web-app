@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import {useMediaStore} from "../store/MediaStore.tsx";
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const useFetchMediaHome = () => {
 
@@ -11,21 +10,11 @@ export const useFetchMediaHome = () => {
 
     React.useEffect(() => {
         const fetchMediaData = async (mediaType: string, category: string) => {
-                let url;
-
-                if (category === 'trending') {
-                    url = `https://api.themoviedb.org/3/${category}/${mediaType}/day?language=en-US`;
-                } else {
-                    url = `https://api.themoviedb.org/3/${mediaType}/${category}?language=en-US&page=1`;
-                }
+                const apiURL = `/.netlify/functions/GetMediaHome?mediaType=${mediaType}&category=${category}`;
 
                 try {
-                    const response = await axios.get(url, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-                        },
-                    });
+                    const response = await axios.get(apiURL);
+
                     updateMediaHomePageList(mediaType, category, response.data);
                 } catch
                     (error) {
@@ -36,23 +25,14 @@ export const useFetchMediaHome = () => {
         const fetchHomeData = async () => {
             await Promise.all([
                 fetchMediaData('movie', 'trending'),
-                await sleep(250),
                 fetchMediaData('tv', 'trending'),
-                await sleep(250),
                 fetchMediaData('movie', 'popular'),
-                await sleep(250),
                 fetchMediaData('tv', 'popular'),
-                await sleep(250),
                 fetchMediaData('movie', 'top_rated'),
-                await sleep(250),
                 fetchMediaData('tv', 'top_rated'),
-                await sleep(250),
                 fetchMediaData('movie', 'now_playing'),
-                await sleep(250),
                 fetchMediaData('tv', 'airing_today'),
-                await sleep(250),
                 fetchMediaData('movie', 'upcoming'),
-                await sleep(250),
                 fetchMediaData('tv', 'on_the_air'),
             ]);
         };
@@ -71,20 +51,15 @@ export const useFetchMediaDetails = (mediaType: string, mediaID: string) => {
 
     React.useEffect(() => {
         const fetchMediaDetails = async () => {
-            const url = `https://api.themoviedb.org/3/${mediaType}/${mediaID}?language=en-US`;
+            const url = `/.netlify/functions/GetFetchMediaDetails?mediaType=${mediaType}&mediaID=${mediaID}`;
             try {
-                const response = await axios.get(url, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-                    },
-                });
+                const response = await axios.get(url);
                 updateSelectedMediaList(response.data);
-            } catch
-                (error) {
+            }
+            catch (error) {
                 console.error(error);
             }
-        };
+        }
         fetchMediaDetails();
     }, [updateSelectedMediaList]);
 }
@@ -95,14 +70,9 @@ export const useFetchMediaCredits = (mediaType: string, mediaID: string) => {
 
     React.useEffect(() => {
         const fetchMediaCredits = async () => {
-            const url = `https://api.themoviedb.org/3/${mediaType}/${mediaID}/credits?language=en-US`;
+            const url = `/.netlify/functions/GetFetchMediaCredits?mediaType=${mediaType}&mediaID=${mediaID}`
             try {
-                const response = await axios.get(url, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-                    },
-                });
+                const response = await axios.get(url);
                 updateSelectedMediaCredits(response.data);
             } catch
                 (error) {
@@ -118,25 +88,11 @@ export const useBrowseMedia = (mediaType: string, browseType: string, selectedBr
     const {updateBrowseList} = useMediaStore();
     React.useEffect(() => {
         const fetchMediaData = async () => {
-            let url!: string;
-            if (browseType === 'category') {
-                url = `https://api.themoviedb.org/3/${mediaType}/${selectedBrowseType}?language=en-US&page=${page}`;
-            } else if (browseType === 'genre') {
-                url = `https://api.themoviedb.org/3/discover/${mediaType}?language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${selectedBrowseType}`;
-            } else if (browseType === 'search' && mediaType === 'all') {
-                url = `https://api.themoviedb.org/3/search/multi?language=en-US&query=${selectedBrowseType}&page=${page}&include_adult=false`;
-            } else if (browseType === 'search') {
-                url = `https://api.themoviedb.org/3/search/${mediaType}?language=en-US&query=${selectedBrowseType}&page=${page}&include_adult=false`;
-            }
+            const url = `/.netlify/functions/GetBrowseMedia?mediaType=${mediaType}&browseType=${browseType}&page=${page}&selectedBrowseType=${selectedBrowseType}`;
 
             try {
 
-                const response = await axios.get(url, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-                    },
-                });
+                const response = await axios.get(url);
                 updateBrowseList(response.data)
             } catch
                 (error) {
@@ -152,14 +108,9 @@ export const useFetchGenres = (mediaType: string) => {
 
     React.useEffect(() => {
         const fetchGenres = async () => {
-            const url = `https://api.themoviedb.org/3/genre/${mediaType}/list?language=en-US`;
+            const url = `/.netlify/functions/GetFetchGenres?mediaType=${mediaType}`;
             try {
-                const response = await axios.get(url, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-                    },
-                });
+                const response = await axios.get(url)
                 setGenres(response.data.genres);
             } catch (error) {
                 console.error(error);
@@ -179,14 +130,9 @@ export const useFetchMediaGenre = (mediaType: string, genreID: string, page: str
 
     React.useEffect(() => {
         const fetchMediaData = async () => {
-            let url = `https://api.themoviedb.org/3/discover/${mediaType}?language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreID}`;
+            const url = `/.netlify/functions/GetFetchMediaGenre?mediaType=${mediaType}&genreID=${genreID}&page=${page}`;
             try {
-                const response = await axios.get(url, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-                    },
-                });
+                const response = await axios.get(url);
                 updateBrowseList(response.data)
             } catch
                 (error) {
