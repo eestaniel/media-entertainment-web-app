@@ -103,6 +103,7 @@
 
 /* categories*/
 .category__section {
+    width: 100%;
     display: grid;
     gap: 1rem;
 }
@@ -112,12 +113,17 @@
     width: 100%;
     gap: 1rem;
 }
-.category__list {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(2, 168px);
-    grid-column-gap: 1rem;
+
+.category__list{
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
+    justify-content: center;
+
+    .media__item__link {
+        max-width: 46%;
+        width: 100%;
+    }
 }
 
 button {

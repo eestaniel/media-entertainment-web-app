@@ -105,7 +105,7 @@ const BrowseMedia = () => {
                     onClick={handleNextPage}
                 >
                     <button
-                        disabled={parseInt(state.page) >= 500}>Continue
+                        disabled={parseInt(state.page) >= browseList[0].total_pages}>Continue
                     </button>
                 </Link>
             </div>
