@@ -1,7 +1,7 @@
-import React, {useRef} from 'react';
 import {useLocation, Link} from 'react-router-dom';
 import {useFetchGenres} from "../../hooks/MediaHooks";
 import './MediaGenres.scss'
+import {useRef} from "react";
 
 const MediaGenres = () => {
     const location = useLocation();

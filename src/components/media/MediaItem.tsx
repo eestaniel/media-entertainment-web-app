@@ -13,8 +13,9 @@ const MediaItem = () => {
     const {reset, resetCredits} = useMediaStore();
 
     /* fetch media details */
-    useFetchMediaDetails(mediaType, mediaID)
-    useFetchMediaCredits(mediaType, mediaID)
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    useFetchMediaDetails(mediaType, mediaID!)
+    useFetchMediaCredits(mediaType, mediaID!)
 
     React.useEffect(() => {
         return () => {
@@ -55,7 +56,7 @@ const MediaItem = () => {
                             {/* iterate genres, use key*/}
                             <h2 className={'small'}>Genres</h2>
                             <div className="genre__container">
-                                {selectedMediaList.genres.map((genre, key) => (
+                                {selectedMediaList.genres.map((genre: any, key: number) => (
                                     <p className={'genre__item'} key={key}>{genre.name}</p>
                                 ))}
                             </div>
@@ -93,7 +94,7 @@ const MediaItem = () => {
                             <div className="media__credits">
                                 <h2 className={'small'}>Cast</h2>
                                 <div className="media__credits__container">
-                                    {selectedMediaCredits.cast.map((cast, key) => (
+                                    {selectedMediaCredits.cast.map((cast:any, key: number) => (
                                         <p className={'small cast__item'}
                                            key={key}>{cast.name}
                                         </p>

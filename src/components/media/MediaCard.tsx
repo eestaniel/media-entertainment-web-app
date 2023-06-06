@@ -1,4 +1,3 @@
-import React from 'react';
 import {Link} from 'react-router-dom';
 import './styles/MediaCard.scss'
 
@@ -9,16 +8,16 @@ interface MediaCardProps {
     logo_size: string;
     backdrop_size: string;
     base_url: string;
-    imgType: string;
 }
 
-const MediaCard = ({mediaType, item, logo_size, backdrop_size, base_url, imgType}: MediaCardProps) => {
+const MediaCard = ({mediaType, item, logo_size, backdrop_size, base_url}: MediaCardProps) => {
 
     const ifMulti = item.media_type ? item.media_type : mediaType;
 
     return (
         <Link
-            to={{pathname: `/${ifMulti}/${item.id}`, state: {itemData: {item}}}}
+            to={{pathname: `/${ifMulti}/${item.id}` }}
+            state={{itemData: {item}}}
             className={'media__item__link'}
             style={{textDecoration: 'none',}}
         >

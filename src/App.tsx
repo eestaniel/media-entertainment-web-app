@@ -1,5 +1,4 @@
-import React from 'react';
-import {BrowserRouter as Router, Route, Routes, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './components/home/Home';
 import Movie from './components/movie/Movie';
 import TV from './components/tv/TV';
@@ -11,7 +10,7 @@ const App = () => {
 
     return (
         <div className={'container'}>
-            <Router>
+            <Router basename={'/media-entertainment-web-app/'}>
                 <Navbar/>
 
                 <div className="main-container">

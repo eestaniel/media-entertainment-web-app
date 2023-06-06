@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import './styles/SearchBar.scss'
 
@@ -23,7 +23,8 @@ const SearchBar = () => {
 
 
     React.useEffect(() => {
-       searchRef.current.value = '';
+       /*set searchref to ''*/
+        searchRef.current!.value = '';
     }, [location.pathname]  )
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

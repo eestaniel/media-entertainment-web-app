@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ConvertLanguage = (langauge: string) => {
     const commonMovieLanguages: {[key: string]: string} = {
         en: "English",

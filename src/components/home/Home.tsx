@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {useFetchMediaHome} from "../../hooks/MediaHooks"
 import {useMediaStore} from "../../store/MediaStore.tsx";
 import MediaCardList from "../media/MediaCardList.tsx";
@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import './Home.scss'
 
 const Home = () => {
+
     const {mediaHomePageList} = useMediaStore();
     /* Load state with media */
     useFetchMediaHome()

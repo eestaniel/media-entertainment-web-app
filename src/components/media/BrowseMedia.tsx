@@ -48,9 +48,9 @@ const BrowseMedia = () => {
                     <div className={"browse__content"}>
 
                         {/* map browseList */}
-                        {browseList.map((media, mediaIndex) => (
+                        {browseList.map((media, ) => (
                             /* Map media.results */
-                            media.results?.map((item, itemIndex) =>
+                            media.results?.map((item: any, itemIndex: number) =>
                                 (item.media_type !== 'person'
                                     && (item.backdrop_path !== null && item.poster__path !== null))
                                     ? (
@@ -63,7 +63,6 @@ const BrowseMedia = () => {
                                                 logo_size={'original'}
                                                 backdrop_size={'original'}
                                                 base_url={'https://image.tmdb.org/t/p/'}
-                                                imgType={'backdrop'}
                                             />
                                         </div>
                                     ) : null

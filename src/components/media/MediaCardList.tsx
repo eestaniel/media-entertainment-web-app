@@ -1,4 +1,3 @@
-import React from 'react';
 import {useMediaStore} from "../../store/MediaStore.tsx";
 import './styles/MediaCardList.scss'
 import MediaCard from "./MediaCard.tsx";
@@ -11,12 +10,15 @@ interface MediaCardListProps {
 }
 
 const MediaCardList = ({mediaType, category, totalAmount, className}: MediaCardListProps) => {
-    const {mediaHomePageList} = useMediaStore();
+    /* define media homepage list any*/
+    const mediaHomePageList:any = useMediaStore((state) => state.mediaHomePageList);
 
     const base_url = "https://image.tmdb.org/t/p/";
     const logo_size = "original";
     const backdrop_size = "original";
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return (
         <div className={className}>
             {/* map mediaHomePageList and display media item.result.title */}

@@ -2,33 +2,38 @@ import {create} from 'zustand'
 import {produce} from 'immer'
 
 type MediaHomePageItem = {
+    /*make movie type */
     movie: {
-        [category: string]: object;
+        [category: string]: any;
     };
     tv: {
-        [category: string]: object;
+        [category: string]: any;
     };
 };
+
+type BrowseList = {
+    [category: string]: any;
+}
 
 
 type MediaStore = {
     /* home page*/
     mediaHomePageList: MediaHomePageItem[];
-    updateMediaHomePageList: (mediaType: string, category: string, data: object) => void;
+    updateMediaHomePageList: (mediaType: string, category: string, data: any) => void;
 
     /* selected media TODO refactor to selectedMediaDetails*/
-    selectedMediaList: object;
-    updateSelectedMediaList: (data: object) => void;
+    selectedMediaList: any;
+    updateSelectedMediaList: (data: any) => void;
     reset: () => void;
 
     /* selected media credits */
-    selectedMediaCredits: object;
-    updateSelectedMediaCredits: (data: object) => void;
+    selectedMediaCredits: any;
+    updateSelectedMediaCredits: (data: any) => void;
     resetCredits: () => void;
 
     /* browse media */
-    browseList: Array<object>;
-    updateBrowseList: (data: object) => void;
+    browseList: BrowseList[];
+    updateBrowseList: (data: any) => void;
     resetBrowseList: () => void;
 };
 

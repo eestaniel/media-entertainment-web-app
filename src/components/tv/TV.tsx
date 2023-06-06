@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import MediaGenres from '../genres/MediaGenres';
 import MediaItem from '../media/MediaItem';
