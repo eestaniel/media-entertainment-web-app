@@ -17,22 +17,20 @@ const BrowseMedia = () => {
 
     useBrowseMedia(state.mediaType, state.browseType, state.selectedBrowseType, state.page)
 
-    const handleTest = () => {
-        console.log(state)
-    }
 
     const handleNextPage = () => {
-        console.log('next page')
-        window.scrollTo(0, 0);
+        const container = document.querySelector('.main-container');
+        container?.scrollTo(0, 0);
     }
 
     React.useEffect(() => {
         return () => {
             // reset browseList when component unmounts
             resetBrowseList();
+            window.scrollTo(0, 0);
         }
 
-    }, [location.pathname]);
+    }, [location.pathname,]);
 
     return (
         <div className={'browse-container'}>
@@ -110,8 +108,6 @@ const BrowseMedia = () => {
                     </button>
                 </Link>
             </div>
-            {/*create test button onclick handleTest*/}
-            <button onClick={handleTest}>Test</button>
         </div>
     );
 };

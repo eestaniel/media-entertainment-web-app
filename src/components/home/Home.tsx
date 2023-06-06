@@ -11,9 +11,6 @@ const Home = () => {
     useFetchMediaHome()
 
 
-    const printState = () => {
-        console.log(mediaHomePageList);
-    }
 
     return (
         <div className={'media-container'}>
@@ -204,9 +201,6 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-
-
-            <button onClick={printState}>Print State</button>
         </div>
     );
 };

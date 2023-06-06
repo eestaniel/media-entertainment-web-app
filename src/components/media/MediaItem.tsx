@@ -39,7 +39,11 @@ const MediaItem = () => {
 
                         <div className="media-item-content">
                             {/* title */}
-                            <h1>{selectedMediaList.name}</h1>
+                            {selectedMediaList.title ? (
+                                <h1 className={'large'}>{selectedMediaList.title}</h1>
+                            ) : (
+                                <h1 className={'large'}>{selectedMediaList.name}</h1>
+                            )}
 
                             {/* tag line */}
                             <p className={'medium tagline'}>{selectedMediaList.tagline}</p>
