@@ -5,23 +5,18 @@
     padding: 1rem;
     display: grid;
     gap: 1.5rem;
-
-    h1 {
-        font-size: 1.25rem;
-    }
-
-    h3 {
-        font-size: $--fs-b-medium;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-    }
+    text-transform: capitalize;
 
     .header__group {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
+
+
+    h1 {
+        font-size: 1.5rem
+    }
+
 }
 

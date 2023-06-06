@@ -1,6 +1,19 @@
+.browse-container {
+    display: grid;
+    text-transform: capitalize;
+    margin: 1.5rem 1rem;
+
+    h1 {
+        font-size: 1.25rem
+    }
+}
+
+
 .browse__content {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 170px);
+    gap: 1.5rem 1rem;
+    margin: 1rem 0;
 }
 
 .browse__navigation {
