@@ -11,7 +11,7 @@
     ul {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
+        gap: calc(100vw /10);
         padding: 0;
     }
     li {
@@ -59,3 +59,5 @@
     border: 1px solid $color-text;
     border-radius: 50%;
 }
+
+
