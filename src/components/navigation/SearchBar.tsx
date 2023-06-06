@@ -24,40 +24,52 @@ const SearchBar = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (location.pathname.split('/')[1] === 'all' || location.pathname.split('/')[1] === '') {
-            navigate(`/all/search/${searchRef.current?.value}?page=1`, {
-                state: {
-                    mediaType: 'all',
-                    browseType: 'search',
-                    selectedBrowseType: searchRef.current?.value,
-                    page: 1
+
+        switch (searchRef.current?.value) {
+            /*check if empty*/
+            case '':
+                return;
+            /*check if only spaces*/
+            case searchRef.current?.value?.match(/^\s*$/)?.input:
+                return;
+            default:
+                if (location.pathname.split('/')[1] === 'all' || location.pathname.split('/')[1] === '') {
+                    navigate(`/all/search/${searchRef.current?.value}?page=1`, {
+                        state: {
+                            mediaType: 'all',
+                            browseType: 'search',
+                            selectedBrowseType: searchRef.current?.value,
+                            page: 1
+                        }
+                    });
+                } else if (location.pathname.split('/')[1] === 'movie') {
+                    navigate(`/movie/search/${searchRef.current?.value}?page=1`, {
+                        state: {
+                            mediaType: 'movie',
+                            browseType: 'search',
+                            selectedBrowseType: searchRef.current?.value,
+                            page: 1
+                        }
+                    });
+                } else if (location.pathname.split('/')[1] === 'tv') {
+                    navigate(`/tv/search/${searchRef.current?.value}?page=1`, {
+                        state: {
+                            mediaType: 'tv',
+                            browseType: 'search',
+                            selectedBrowseType: searchRef.current?.value,
+                            page: 1
+                        }
+                    });
                 }
-            });
-        } else if (location.pathname.split('/')[1] === 'movie') {
-            navigate(`/movie/search/${searchRef.current?.value}?page=1`, {
-                state: {
-                    mediaType: 'movie',
-                    browseType: 'search',
-                    selectedBrowseType: searchRef.current?.value,
-                    page: 1
-                }
-            });
-        } else if (location.pathname.split('/')[1] === 'tv') {
-            navigate(`/tv/search/${searchRef.current?.value}?page=1`, {
-                state: {
-                    mediaType: 'tv',
-                    browseType: 'search',
-                    selectedBrowseType: searchRef.current?.value,
-                    page: 1
-                }
-            });
         }
+
+
     }
 
     return (
         <form onSubmit={handleSubmit}>
             {/* create search bar*/}
-            <div className={`search-bar ${focus? 'focus': searchRef.current?.value !== ''? 'hasQuery': ''}`}>
+            <div className={`search-bar ${focus ? 'focus' : searchRef.current?.value !== '' ? 'hasQuery' : ''}`}>
                 <div className="search-bar__icon" datatype={'search'}></div>
                 <input
                     type="text"
