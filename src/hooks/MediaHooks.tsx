@@ -116,7 +116,6 @@ export const useFetchMediaCredits = (mediaType: string, mediaID: string) => {
 export const useBrowseMedia = (mediaType: string, browseType: string, selectedBrowseType: string, page: string) => {
 
     const {updateBrowseList} = useMediaStore();
-    console.log('mediaType:', mediaType, 'browseType:', browseType, 'selectedBrowseType:', selectedBrowseType, 'page:', page);
     React.useEffect(() => {
         const fetchMediaData = async () => {
             let url!: string;

@@ -24,9 +24,6 @@ const MediaItem = () => {
         }
     }, [])
 
-    const printStuff = () => {
-        console.log(selectedMediaList);
-    }
 
     return (
         <React.Fragment>

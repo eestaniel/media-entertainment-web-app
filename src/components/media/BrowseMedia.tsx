@@ -10,10 +10,6 @@ const BrowseMedia = () => {
     const state = location.state;
     const {browseList, resetBrowseList} = useMediaStore();
 
-    /* fetch data */
-    /*useBrowseMedia(mediaType, category, currentPage)*/
-    console.log(state.mediaType, state.browseType, state.selectedBrowseType, state.page)
-
 
     useBrowseMedia(state.mediaType, state.browseType, state.selectedBrowseType, state.page)
 
