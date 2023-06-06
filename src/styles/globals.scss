@@ -2,46 +2,78 @@
 @import '_typography.scss';
 
 body {
-  background-color: $color-background;
-  font-family: $--ff-primary;
-  color: $color-text;
-  height: 100vh;
-  display: grid;
-
-  overflow-x: hidden;
+    background-color: $color-background;
+    font-family: $--ff-primary;
+    color: $color-text;
+    height: 100vh;
+    display: grid;
+    overflow-x: hidden;
 }
 
 h1 {
-  font-weight: $--fw-light;
-  font-size: $--fs-h-large;
+    font-weight: $--fw-light;
+    font-size: $--fs-h-large;
 }
 
 h2 {
-  &.medium {
-    font-weight: $--fw-light;
-    font-size: $--fs-h-small-medium;
-  }
+    &.medium {
+        font-weight: $--fw-light;
+        font-size: $--fs-h-small-medium;
+    }
 
-  &.small {
-    font-weight: $--fw-normal;
-    font-size: $--fs-h-small-medium;
-  }
+    &.small {
+        font-weight: $--fw-normal;
+        font-size: $--fs-h-small-medium;
+    }
 
 }
 
 h3 {
-  font-weight: $--fw-normal;
-  font-size: $--fs-h-extra-small;
+    font-weight: $--fw-normal;
+    font-size: $--fs-h-extra-small;
 }
 
 p {
-  &.medium {
-    font-weight: $--fw-light;
-    font-size: $--fs-b-medium;
-  }
+    &.medium {
+        font-weight: $--fw-light;
+        font-size: $--fs-b-medium;
+    }
 
-  &.small {
-    font-weight: $--fw-light;
-    font-size: $--fs-b-small;
-  }
+    &.small {
+        font-weight: $--fw-light;
+        font-size: $--fs-b-small;
+    }
 }
+
+
+@media screen and (min-width: 1024px) {
+    body {
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: min-content 1fr;
+        grid-template-areas:
+                "navigation container";
+        padding: 1.5rem;
+        position: relative;
+    }
+
+    .navbar {
+        display: grid;
+        grid-area: navigation;
+        position: sticky;
+
+    }
+
+    .main-container {
+        display: grid;
+        grid-area: container;
+        overflow-y: scroll;
+        height: 100vh;
+
+    }
+
+
+}
+

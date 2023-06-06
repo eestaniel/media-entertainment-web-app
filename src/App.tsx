@@ -10,22 +10,25 @@ import All from "./components/all/All.tsx";
 const App = () => {
 
     return (
-        <React.Fragment>
+        <div className={'container'}>
             <Router>
                 <Navbar/>
-                <SearchBar/>
-                <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/movie/*" element={<Movie/>}/>
-                    <Route path="/tv/*" element={<TV/>}/>
-                    <Route path="/all/*" element={<All/>}/>
-                    {/* TODO change to error 404 not found*/}
-                    {/*<Route path="/*" element={<Home />} />*/}
 
-                    {/*TODO Validate url parameters before using in api calls*/}
-                </Routes>
+                <div className="main-container">
+                    <SearchBar/>
+                    <Routes>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/movie/*" element={<Movie/>}/>
+                        <Route path="/tv/*" element={<TV/>}/>
+                        <Route path="/all/*" element={<All/>}/>
+                        {/* TODO change to error 404 not found*/}
+                        {/*<Route path="/*" element={<Home />} />*/}
+
+                        {/*TODO Validate url parameters before using in api calls*/}
+                    </Routes>
+                </div>
             </Router>
-        </React.Fragment>
+        </div>
     );
 };
 
